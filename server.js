@@ -46,15 +46,8 @@ const app = express();
 app.use(express.json());
 
 
-const corsOptions = {
-  origin: '*', // Allow all origins, you can restrict to specific domains if needed
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'x-access-token'],
-};
-
-app.use(cors(corsOptions));
-app.options('*', cors(corsOptions)); // Pre-flight OPTIONS request
-
+app.use(cors())
+app.options('*', cors())
 
  //tcomperi les fichiers
 app.use(compression())
