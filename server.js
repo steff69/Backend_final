@@ -1,77 +1,143 @@
-// Import necessary modules
 const path = require('path');
+
 const express = require('express');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
-const cors = require('cors');
-const compression = require('compression');
+
+dotenv.config({ path: 'config.env' });
 const ApiError = require('./utils/apiError');
 const globalError = require('./middlewares/errorMiddleware');
 const dbConnection = require('./config/database');
+const cors = require('cors')
+const compression = require('compression')
 
-// Load environment variables from config.env file
-dotenv.config({ path: 'config.env' });
+// Routes
 
-// Import Routes
-const User = require('./routes/authuser');
-const Vole = require('./routes/vole');
-const VoleMain = require('./routes/voleMain');
 
-// Connect with the database
+
+
+
+
+
+
+const User=require('./routes/authuser');
+
+
+const Vole=require('./routes/vole');
+const VoleMain=require('./routes/voleMain');
+
+
+
+
+
+
+
+
+
+
+
+// Connect with db
 dbConnection();
 
-// Initialize the express app
+// express app
 const app = express();
 
-// Middleware to parse JSON requests
+// Middlewares
 app.use(express.json());
 
-// Enable CORS for cross-origin requests
-app.use(cors());
-app.options('*', cors()); // Enable CORS pre-flight for all routes
 
-// Enable compression for responses
-app.use(compression());
+app.use(cors())
+app.options('*', cors())
 
-// Serve static files from the 'uploads' directory
+ //tcomperi les fichiers
+app.use(compression())
+
+
+//tkhademlek file hetha 
 app.use(express.static(path.join(__dirname, 'uploads')));
 
-// Use morgan for logging requests in development mode
+
+
+
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
-  console.log(`Running in development mode`);
+  console.log(`mode: ${process.env.NODE_ENV}`);
 }
 
-// Define routes
-app.get('/api/s', (req, res) => {
-  console.log('Endpoint hit');
-  res.send("dzdzdz");
-});
 
-// Mount API routes
-app.use('/api/vole', Vole);
-app.use('/api/voleMain', VoleMain);
+
+
+
+
+
+
+
+
+
+
+     
+
+
+
+ 
+
+
+
+
+app.get('/api/s', (req,res)=>{
+  console.log(2);
+  res.send("dzdzdz")
+}
+);
+
+
+// Mount Routes
+app.use('/api/Vole', Vole);
+app.use('/api/VoleMain', VoleMain);
+
+
+
 app.use('/api/user', User);
 
-// Handle undefined routes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 app.all('*', (req, res, next) => {
   next(new ApiError(`Can't find this route: ${req.originalUrl}`, 400));
 });
 
-// Global error handling middleware
+// Global error handling middleware for express
 app.use(globalError);
 
-// Define the port to listen on, defaulting to 8000
 const PORT = process.env.PORT || 8000;
 const server = app.listen(PORT, () => {
-  console.log(`App running on port ${PORT}`);
+  console.log(`App running running on port ${PORT}`);
 });
 
-// Handle unhandled promise rejections globally
+// Handle rejection outside express
 process.on('unhandledRejection', (err) => {
-  console.error(`Unhandled Rejection: ${err.name} | ${err.message}`);
+  console.error(`UnhandledRejection Errors: ${err.name} | ${err.message}`);
   server.close(() => {
-    console.error('Shutting down the server due to unhandled rejection...');
-    process.exit(1); // Exit with a failure status
+    console.error(`Shutting down....`);
+    process.exit(1);
   });
 });
