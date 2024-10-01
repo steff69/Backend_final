@@ -13,12 +13,7 @@ const compression = require('compression')
 
 // Routes
 
-const corsOptions = {
-  origin: '*', // You can replace '*' with specific domains in production
-  optionsSuccessStatus: 200
-};
-app.use(cors(corsOptions));
-app.options('*', cors());
+
 
 
 
