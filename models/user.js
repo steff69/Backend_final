@@ -9,6 +9,8 @@ email: {type: String, required: true, unique:true},
 password: {type: String, required: true},
 
 phone: {type: String, default:"0123456789"},
+mileprim: {type: String, default:"1000"},
+milequal: {type: String, default:"0"},
 
 
 
