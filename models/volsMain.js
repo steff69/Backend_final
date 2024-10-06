@@ -6,6 +6,8 @@ const voleSchema= new mongoose.Schema({
     to: {type: String, required: true},
     date:{type:String},
     time:{type:String},
+    deptime:{type:String},
+    arrtime:{type:String},
 
 
     

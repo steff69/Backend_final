@@ -11,7 +11,7 @@ module.exports={
 addVoleMain: async ( req,res )=>{
 
 
-    const {fm, to, date,time}= req.body;
+    const {fm, to, date, time, deptime, arrtime}= req.body;
 
           
              
@@ -23,7 +23,7 @@ addVoleMain: async ( req,res )=>{
 
                 const newVole =new Vole( req.body)  ;
                 await newVole.save()                  
-                    res.status(201).json({ status: false, message: "VoleMain has been successfully ad" })
+                    res.status(201).json({ status: false, message: "Vol has been successfully ad" })
                    
              }
              catch (error) {
