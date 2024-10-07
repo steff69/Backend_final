@@ -11,7 +11,7 @@ module.exports={
 addVoleMain: async ( req,res )=>{
 
 
-    const {fm, to, date, time, deptime, arrtime}= req.body;
+    const {fm, to, date, time, deptime, arrtime,price}= req.body;
 
           
              

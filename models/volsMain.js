@@ -8,7 +8,7 @@ const voleSchema= new mongoose.Schema({
     time:{type:String},
     deptime:{type:String},
     arrtime:{type:String},
-
+    price:{type:String},
 
     
    
