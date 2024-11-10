@@ -6,5 +6,9 @@
     "Namespaces",
     "Structs"
   ],
-  "cSpell.words": ["uuidv", "virtuals"]
+  "cSpell.words": [
+    "uuidv",
+    "virtuals"
+  ],
+  "git.ignoreLimitWarning": true
 }
